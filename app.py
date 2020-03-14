@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_restful import Api, reqparse
 from flask_jwt import JWT
@@ -12,7 +13,9 @@ from db import db
 app = Flask(__name__)
 # turn of flasks modification tracker it's wasting resources
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+#use the postgres db on heroku or sqlite if running local
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+
 app.secret_key = 'password'
 api = Api(app)
 
