@@ -7,7 +7,6 @@ from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 from models.user import UserModel
-
 from db import db
 
 app = Flask(__name__)
@@ -33,6 +32,7 @@ api.add_resource(Item, '/item/<string:name>')  # http://localhost:5000/student/a
 api.add_resource(ItemList, '/items')
 api.add_resource(UserRegister, '/register')
 api.add_resource(StoreList, '/stores')
+
 
 if __name__ == '__main__':
 
