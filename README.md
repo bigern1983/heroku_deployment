@@ -1,7 +1,8 @@
 # REST API with Flask
 
 ## Installation
-```
+
+```bash
 pip install Flask
 python app.py
 ```
