@@ -20,6 +20,10 @@ class StoreModel(db.Model):
         #SELECT * FROM items WHERE name=name LIMIT 1
         #get the first matching row 
         return cls.query.filter_by(name=name).first()
+    
+    @classmethod
+    def find_all(cls):
+        return cls.query.all()
 
     def save_to_db(self):
         db.session.add(self)

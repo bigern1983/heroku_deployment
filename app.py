@@ -15,7 +15,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #use the postgres db on heroku or sqlite if running local
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
-
+app.config['PROPOGATE_EXCEPTIONS'] = True
 app.secret_key = 'password'
 api = Api(app)
 
@@ -24,7 +24,6 @@ api = Api(app)
 def create_tables():
     # creates everything automatically
     db.create_all()
-
 
 # creates an endpoint /auth
 # takes a username and password and sends to authenticate
