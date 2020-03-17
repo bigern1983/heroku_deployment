@@ -6,6 +6,7 @@ class StoreModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     #query builder that can retrieve items for db
+    #any items in db that are related to our store
     items = db.relationship('ItemModel', lazy='dynamic')
 
 
@@ -13,7 +14,11 @@ class StoreModel(db.Model):
         self.name = name
 
     def json(self):
-        return {'name': self.name, 'items':[item.json() for item in self.items.all()]}
+        return {
+                'id' : self.id,
+                'name': self.name, 
+                'items':[item.json() for item in self.items.all()]
+                }
 
     @classmethod #classmethod returns an object of its own type
     def find_by_name(cls, name):

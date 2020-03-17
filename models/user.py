@@ -16,13 +16,26 @@ class UserModel(db.Model):
         self.username = username
         self.password = password
 
+
+    def json(self):
+        return {
+            'id' : self.id,
+            'username' : self.username
+        }
+
     @classmethod
     def find_by_username(cls, username):
         return cls.query.filter_by(username=username).first()
     
     @classmethod
     def find_by_id(cls, _id):
-        return cls.query.filter_by(id=_id)
+        return cls.query.filter_by(id=_id).first()
+
+
+
+    def delete_from_db(self):
+        db.session.delete(self)
+        db.session.commit()
 
     def safe_to_db(self):
         db.session.add(self)
